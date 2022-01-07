@@ -27,12 +27,13 @@ class Tabelas {
             id int not null AUTO_INCREMENT,  
             cliente VARCHAR (50) NOT NULL, 
             pet varchar(20),
-            servico varchar(20) not null,  
+            servico varchar(20) not null, 
+            dataCriacao datetime not null,
+            dataAtendimento date not null,
             Status_servico varchar(20) not null,
-            observacoes text,
+            observacoes text, 
             primary key(id)
-            );
-        
+            ); 
         `
         this.conexao.query(sql, (error)=>{
             if(error){
@@ -43,6 +44,6 @@ class Tabelas {
         })
     }
 }
-     s 
+     
  
 module.exports = new Tabelas  

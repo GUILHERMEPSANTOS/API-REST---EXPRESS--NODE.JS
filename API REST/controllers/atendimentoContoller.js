@@ -1,14 +1,16 @@
 const req = require("express/lib/request");
 const { append } = require("express/lib/response");
+const AtendimentoModel = require('../models/atendimentosModel')
 
 module.exports = app => {
     app.get('/atendimentos', (req,res)=>{
         res.send("você está na rota de atendimentos ")
+      
     })
 
     app.post('/atendimentos', (req,res)=>{
-    console.log(req.body)
-    res.send('você esta na rota de atendimento POST ')        
+        res.send('você esta na rota de atendimento POST ')        
+        AtendimentoModel.adicionar(req.body)
     })
 }
 
