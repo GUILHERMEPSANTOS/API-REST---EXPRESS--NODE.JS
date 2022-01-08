@@ -1,16 +1,29 @@
-const req = require("express/lib/request");
-const { append } = require("express/lib/response");
-const AtendimentoModel = require('../models/atendimentosModel')
+
+const atendimentosModel = require("../models/atendimentosModel");
 
 module.exports = app => {
-    app.get('/atendimentos', (req,res)=>{
-        res.send("você está na rota de atendimentos ")
-      
+    app.get('/atendimentos', (_,res)=>{
+      atendimentosModel.listar(res)
+    })
+    app.get('/atendimentos/:id',(req,res)=>{
+        const id = parseInt(req.params.id)
+        atendimentosModel.listarID (id,res)
     })
 
-    app.post('/atendimentos', (req,res)=>{
-        res.send('você esta na rota de atendimento POST ')        
-        AtendimentoModel.adicionar(req.body)
+    app.patch('/atendimentos/:id',(req,res)=>{
+       
+        const id = parseInt(req.params.id)
+        const valores = req.body
+        atendimentosModel.alterar(id,valores,res)
+    })
+
+    app.post('/atendimentos', (req,res)=>{    
+        atendimentosModel.adicionar(req.body,res)
+    /*   */
+    })
+    app.delete('/atendimentos/:id', (req,res)=>{
+        const id = parseInt(req.params.id)
+        atendimentosModel.deletar(id,res)
     })
 }
 
